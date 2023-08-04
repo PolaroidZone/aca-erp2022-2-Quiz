@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import logo from './aca.png'
 import quizData from './quizData.json'
 import Congratulations from './components/Congratulations'
 import { query ,getDocs, collection, addDoc } from 'firebase/firestore'
 import { DocumentData } from 'firebase/firestore/lite';
 import {db} from './firebase/config'
+import NavBar from "./components/NavBar";
 
 import './App.css'
 
@@ -134,43 +134,29 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} style={{maxWidth:150, maxHeight:150}} className="App-logo" alt="logo" />
-        <p>
-          ACA Quiz App
-        </p>
-        <a
-          className="App-link"
-          href="https://africacode.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          I Love ACA
-        </a>
-
+      <NavBar/>
         <div className="container">
           <div className="quiz-box">
-        {currentQuestion < quizQuestions.length ? (
-          <div className="quiz-question">
-            <h2>{quizQuestions[currentQuestion].question}</h2>
-            <div className="quiz-options">
-              <ul>
-                {quizQuestions[currentQuestion].answers.map((answer: Answer, index: number) => (
-                  <li key={index} onClick={() => handleAnswerClick(answer.correct)}>
-                    <div className="option">
-                      <p>{answer.text}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {currentQuestion < quizQuestions.length ? (
+              <div className="quiz-question">
+                <h2>{quizQuestions[currentQuestion].question}</h2>
+                <div className="quiz-options">
+                  <ul>
+                    {quizQuestions[currentQuestion].answers.map((answer: Answer, index: number) => (
+                      <li key={index} onClick={() => handleAnswerClick(answer.correct)}>
+                        <div className="option">
+                          <p>{answer.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <Congratulations score={score} totalQuestions={quizQuestions.length} />
+            )}
           </div>
-        ) : (
-          <Congratulations score={score} totalQuestions={quizQuestions.length} />
-        )}
-      </div>
         </div>
-      </header> 
     </div>
   )
 }
