@@ -1,12 +1,3 @@
-.container{
-  width: 800px;
-  margin-top: 40px;
-  background-color: rgb(56, 60, 100);
-  box-shadow: 1px 1px 8px 2px #ffc4c45d;
-  border-radius: 30px;
-  padding-top: 20px;
-  padding-bottom: 60px;
-}
   
 .quiz-box{
   display: flex;
