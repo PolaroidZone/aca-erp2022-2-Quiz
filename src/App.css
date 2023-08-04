@@ -94,7 +94,7 @@ li {
 }
 .option:hover {
   transition: 0.5s;
-  background-color: rgb(56, 60, 100);
+  background-color: rgb(56, 60, 100); 
 }
 
 p{
