@@ -7,6 +7,8 @@ import {db} from './firebase/config'
 import NavBar from "./components/NavBar";
 
 import './App.css'
+import './styles/Container.css'
+
 
 //settingd the question type 
 type Question = {
