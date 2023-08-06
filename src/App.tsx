@@ -7,7 +7,10 @@ import {db} from './firebase/config'
 import NavBar from "./components/NavBar"
 import SideNavL from "./components/SideNavL"
 import SideNavR from "./components/SideNavR"
-import hulk from "./images/hulk.png"
+import SuperheroNavigation from "./components/SuperheroNavigationProps"
+import Quiz  from './components/Quiz';
+
+import hulk from "./images/Spider-man.png"
 
 import './App.css'
 import './styles/Container.css'
@@ -15,6 +18,7 @@ import './styles/Container.css'
 
 //settingd the question type 
 type Question = {
+  superhero: string;
   question: string
   answers: Answer[]
 }
@@ -33,57 +37,79 @@ function App() {
   //use state to monitor questions
   const [currentQuestion, setCurrentQuestion] = useState(0)
   //use state to monitor uploading of quize questions to firebase
-  const [quizQuestions, setQuizQuestions] = useState<DocumentData[]>([])
+  // const [quizQuestions, setQuizQuestions] = useState<DocumentData[]>([])
+
+  const [quizQuestions, setQuizQuestions] = useState<Question[]>([]);
 
 
-  //setting json questions to firebase questions
-  useEffect(() => {
-    const saveQuizQuestions = async () => {
-      const quizQuestionsCollectionRef = collection(db, 'quizQuestions')
+  // //setting json questions to firebase questions
+  // useEffect(() => {
+  //   const saveQuizQuestions = async () => {
+  //     const quizQuestionsCollectionRef = collection(db, 'quizQuestions')
     
-      // Create a query to get all documents from the collection
-      const quizQuestionsQuery = query(quizQuestionsCollectionRef)
+  //     // Create a query to get all documents from the collection
+  //     const quizQuestionsQuery = query(quizQuestionsCollectionRef)
     
-      try {
-        // Get the query snapshot
-        const querySnapshot = await getDocs(quizQuestionsQuery);
-        const questionsExist = !querySnapshot.empty;
+  //     try {
+  //       // Get the query snapshot
+  //       const querySnapshot = await getDocs(quizQuestionsQuery);
+  //       const questionsExist = !querySnapshot.empty;
     
-        // If the collection is empty, save the quiz questions
-        if (!questionsExist) {
-          for (const question of quizData) {
-            try {
-              await addDoc(quizQuestionsCollectionRef, question)
-              console.log('Question saved:', question)
-            } catch (error) {
-              console.error('Error saving question:', error)
-            }
-          }
-        } else {
-          console.log('Quiz questions already exist in the database.')
-        }
-      } catch (error) {
-        console.error('Error getting squiz questions:', error)
-      }
+  //       // If the collection is empty, save the quiz questions
+  //       if (!questionsExist) {
+  //         for (const question of quizData) {
+  //           try {
+  //             await addDoc(quizQuestionsCollectionRef, question)
+  //             console.log('Question saved:', question)
+  //           } catch (error) {
+  //             console.error('Error saving question:', error)
+  //           }
+  //         }
+  //       } else {
+  //         console.log('Quiz questions already exist in the database.')
+  //       }
+  //     } catch (error) {
+  //       console.error('Error getting squiz questions:', error)
+  //     }
+  //   }
+    
+  //   saveQuizQuestions()
+  // }, [])
+
+  const getQuizQuestions = async (superhero: string) => {
+    const quizQuestionsCollectionRef = collection(db, 'quizQuestions');
+    try {
+      const querySnapshot = await getDocs(quizQuestionsCollectionRef);
+      const questions = querySnapshot.docs
+        .map((doc) => doc.data() as Question)
+        .filter((question) => question.superhero === superhero);
+      setQuizQuestions(questions);
+    } catch (error) {
+      console.error('Error getting quiz questions:', error);
     }
-    
-    saveQuizQuestions()
-  }, [])
+  };
+
 
   //getting questions form firebase
-  useEffect(() => {
-    const getQuizQuestions = async () => {
-      const quizQuestionsCollectionRef = collection(db, 'quizQuestions')
-      try {
-        const querySnapshot = await getDocs(quizQuestionsCollectionRef)
-        const questions = querySnapshot.docs.map((doc) => doc.data() as Question)
-        setQuizQuestions(questions)
-      } catch (error) {
-        console.error('Error getting quiz questions:', error)
-      }
+  // Update the useEffect to format the data correctly
+useEffect(() => {
+  const getQuizQuestions = async (superhero: string) => {
+    const quizQuestionsCollectionRef = collection(db, 'quizQuestions');
+    try {
+      const querySnapshot = await getDocs(quizQuestionsCollectionRef);
+      const questions = querySnapshot.docs
+        .map((doc) => doc.data() as Question)
+        .filter((question) => question.superhero === superhero);
+      setQuizQuestions(questions);
+      setCurrentQuestion(0); // Reset currentQuestion to 0 when a new superhero is selected
+    } catch (error) {
+      console.error('Error getting quiz questions:', error);
     }
-    getQuizQuestions()
-  }, [])
+  };
+
+  // Call getQuizQuestions when the component mounts to fetch questions for the initial superhero (e.g., "Iron Man")
+  getQuizQuestions('Iron Man');
+}, []);
 
   //click handle for answring
   const handleAnswerClick = (correct: boolean) => {
@@ -104,43 +130,16 @@ function App() {
         <div className="container">
           <div className="side-nac-main-con">
             <SideNavL/>
-            <div className="character-con">
-              <div className="charecter">
-                  <div className="char-indicator"></div>
-                  <div className="char-main">
-                      <img src={hulk} alt="" />
-                      <h1>Hulk</h1>
-                  </div>
-                </div>
-            </div>
+            <SuperheroNavigation superheroes={['Iron Man', 'Spider-Man', 'Shuri']} onSuperheroSelect={getQuizQuestions} />
           </div>
           <div className="quiz-box">
-            <div className="hero-name">
-              <div className="heroname-container">
-                <h1 className="hero-name-main">Iron</h1>  
-                <h1 className="hero-name-last">Man</h1>
-              </div>
-              <div className="hero-name-botton">
-                <div className="line-1"></div>
-                <div className="line-2"></div>
-              </div>
-            </div>
             {currentQuestion < quizQuestions.length ? (
-              <div className="quiz-question">
-                
-                <h2>{quizQuestions[currentQuestion].question}</h2>
-                <div className="quiz-options">
-                  <ul>
-                    {quizQuestions[currentQuestion].answers.map((answer: Answer, index: number) => (
-                      <li key={index} onClick={() => handleAnswerClick(answer.correct)}>
-                        <div className="option">
-                          <p>{answer.text}</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <Quiz
+              superhero="Iron Man" // Replace this with the selected superhero name
+              questions={quizQuestions}
+              currentQuestion={currentQuestion}
+              handleAnswerClick={handleAnswerClick}
+            />
             ) : (
               <Congratulations score={score} totalQuestions={quizQuestions.length} />
             )}
