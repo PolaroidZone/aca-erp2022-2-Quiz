@@ -100,9 +100,17 @@ function App() {
   return (
     <div className="App">
       <NavBar/>
-      
         <div className="container">
           <SideNavL/>
+          <div className="character-con">
+            <div className="charecter">
+                <div className="char-indicator"></div>
+                <div className="char-main">
+                    <img src="" alt="" />
+                    <h1>Shuri</h1>
+                </div>
+              </div>
+          </div>
           <div className="quiz-box">
             {currentQuestion < quizQuestions.length ? (
               <div className="quiz-question">
@@ -122,6 +130,9 @@ function App() {
             ) : (
               <Congratulations score={score} totalQuestions={quizQuestions.length} />
             )}
+          </div>
+          <div className="Char-image">
+            <img src="" alt="" />
           </div>
           <SideNavR/>
         </div>

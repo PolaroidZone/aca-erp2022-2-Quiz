@@ -53,6 +53,11 @@ nav{
     transition: ease-in-out .5s;
 }
 
+.active {
+    border-bottom: 1px solid #fff;
+    transition: ease-in .5s; 
+}
+
 
 
 
@@ -187,10 +192,12 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: ease-in .3s;
 }
 
 .side-nav-boxlinks div:hover {
     background-color: red;
+    transition: ease-in .3s;
 }
 
 .side-NavR-bottom {
