@@ -7,6 +7,7 @@ import {db} from './firebase/config'
 import NavBar from "./components/NavBar"
 import SideNavL from "./components/SideNavL"
 import SideNavR from "./components/SideNavR"
+import hulk from "./images/hulk.png"
 
 import './App.css'
 import './styles/Container.css'
@@ -107,8 +108,8 @@ function App() {
               <div className="charecter">
                   <div className="char-indicator"></div>
                   <div className="char-main">
-                      <img src="" alt="" />
-                      <h1>Shuri</h1>
+                      <img src={hulk} alt="" />
+                      <h1>Hulk</h1>
                   </div>
                 </div>
             </div>
@@ -146,7 +147,8 @@ function App() {
           </div>
           <div className="side-nac-main-con">
             <div className="Char-image">
-              <img src="" alt="" />
+              <div></div>
+              <img src={hulk} alt="" />
             </div>
             <SideNavR/>
           </div>
