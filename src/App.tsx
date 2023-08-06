@@ -4,7 +4,9 @@ import Congratulations from './components/Congratulations'
 import { query ,getDocs, collection, addDoc } from 'firebase/firestore'
 import { DocumentData } from 'firebase/firestore/lite';
 import {db} from './firebase/config'
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar"
+import SideNavL from "./components/SideNavL"
+import SideNavR from "./components/SideNavR"
 
 import './App.css'
 import './styles/Container.css'
@@ -94,50 +96,13 @@ function App() {
       setCurrentQuestion(quizQuestions.length) // Set the currentQuestion to the last question index
     }
   }
-  
-
-  //old save question fucntion
-  // const saveQuizQuestions = async () => {
-  //   const quizQuestionsCollectionRef = collection(db, 'quizQuestions')
-  
-  //   // Check if the collection is empty
-  //   const quizQuestionsQuery = query(quizQuestionsCollectionRef)
-  //   const querySnapshot = await getDocs(quizQuestionsQuery)
-  //   const questionsExist = !querySnapshot.empty;
-  
-  //   // If the collection is empty, save the quiz questions
-  //   if (!questionsExist) {
-  //     for (const question of quizData) {
-  //       try {
-  //         await addDoc(quizQuestionsCollectionRef, question)
-  //         console.log('Question saved:', question)
-  //       } catch (error) {
-  //         console.error('Error saving question:', error)
-  //       }
-  //     }
-  //   } else {
-  //     console.log('Quiz questions already exist in the database.')
-  //   }
-  // }
-
-  // const getQuizQuestions = async () => {
-  //   try {
-  //     const quizQuestionsCollectionRef = collection(db, 'quizQuestions')
-  //     const querySnapshot = await getDocs(quizQuestionsCollectionRef)
-
-  //     // Explicitly define the type for the questions array
-  //     const questions: DocumentData[] = querySnapshot.docs.map((doc) => doc.data())
-  //     setQuizQuestions(questions)
-  //   } catch (error) {
-  //     console.error('Error getting quiz questions:', error)
-  //   }
-  // }
-
 
   return (
     <div className="App">
       <NavBar/>
+      
         <div className="container">
+          <SideNavL/>
           <div className="quiz-box">
             {currentQuestion < quizQuestions.length ? (
               <div className="quiz-question">
@@ -158,6 +123,7 @@ function App() {
               <Congratulations score={score} totalQuestions={quizQuestions.length} />
             )}
           </div>
+          <SideNavR/>
         </div>
     </div>
   )
