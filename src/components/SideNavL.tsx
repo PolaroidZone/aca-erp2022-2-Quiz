@@ -6,7 +6,7 @@ import { faArrowAltCircleDown, faArrowAltCircleUp } from '@fortawesome/free-soli
 
 const SideNavL = () => {
   return (
-    <div className="side-nav">
+    <div className="side-navL">
         <div className="side-nav-box">
             <ul className="side-socials">
                 <li><a href=""><FontAwesomeIcon icon={faYoutube} size="2x" /></a></li>
@@ -20,7 +20,7 @@ const SideNavL = () => {
                     <FontAwesomeIcon icon={faArrowAltCircleUp} size="2x" />
                 </div>
                 <div className="act-message">
-                    <h1 className="side-nav-text"></h1>
+                    <h1 className="side-nav-text">SCROLL</h1>
                 </div>
                 <div className="act-btn">
                     <FontAwesomeIcon icon={faArrowAltCircleDown} size="2x" />
