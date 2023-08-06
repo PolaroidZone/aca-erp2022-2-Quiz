@@ -134,6 +134,7 @@ p{
 
 .char-indicator {
   width: 10px;
+  position: relative;
 }
 
 .char-main h1{
@@ -145,6 +146,7 @@ p{
 
 .char-main img {
   height: 200px;
+  width: 400px;
   object-fit: cover;
 }
 
