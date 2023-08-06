@@ -101,19 +101,32 @@ function App() {
     <div className="App">
       <NavBar/>
         <div className="container">
-          <SideNavL/>
-          <div className="character-con">
-            <div className="charecter">
-                <div className="char-indicator"></div>
-                <div className="char-main">
-                    <img src="" alt="" />
-                    <h1>Shuri</h1>
+          <div className="side-nac-main-con">
+            <SideNavL/>
+            <div className="character-con">
+              <div className="charecter">
+                  <div className="char-indicator"></div>
+                  <div className="char-main">
+                      <img src="" alt="" />
+                      <h1>Shuri</h1>
+                  </div>
                 </div>
-              </div>
+            </div>
           </div>
           <div className="quiz-box">
+            <div className="hero-name">
+              <div className="heroname-container">
+                <h1 className="hero-name-main">Iron</h1>  
+                <h1 className="hero-name-last">Man</h1>
+              </div>
+              <div className="hero-name-botton">
+                <div className="line-1"></div>
+                <div className="line-2"></div>
+              </div>
+            </div>
             {currentQuestion < quizQuestions.length ? (
               <div className="quiz-question">
+                
                 <h2>{quizQuestions[currentQuestion].question}</h2>
                 <div className="quiz-options">
                   <ul>
@@ -131,10 +144,13 @@ function App() {
               <Congratulations score={score} totalQuestions={quizQuestions.length} />
             )}
           </div>
-          <div className="Char-image">
-            <img src="" alt="" />
+          <div className="side-nac-main-con">
+            <div className="Char-image">
+              <img src="" alt="" />
+            </div>
+            <SideNavR/>
           </div>
-          <SideNavR/>
+          
         </div>
     </div>
   )
