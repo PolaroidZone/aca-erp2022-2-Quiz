@@ -67,7 +67,8 @@ function App() {
         .filter((question) => question.superhero === superhero);
       setQuizQuestions(questions);
       setSelectedSuperhero(superhero)
-
+      setCurrentQuestion(0);
+      
       if (superhero == 'Iron Man'){
         selectedHeroImg(ironMan)
       } else if (superhero == 'Spider-Man'){
@@ -138,7 +139,7 @@ useEffect(() => {
               handleAnswerClick={handleAnswerClick}
             />
             ) : (
-              <Congratulations score={score} totalQuestions={quizQuestions.length} />
+              <Congratulations score={score} totalQuestions={quizQuestions.length} superhero={selectedSuperhero}/>
             )}
           </div>
           <div className="side-nac-main-con">

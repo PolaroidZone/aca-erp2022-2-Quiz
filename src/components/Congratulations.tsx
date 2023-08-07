@@ -4,9 +4,10 @@ import React from 'react'
 interface CongratulationsProps {
   score: number
   totalQuestions: number
+  superhero: string;
 }
 
-const Congratulations: React.FC<CongratulationsProps> = ({ score, totalQuestions }) => {
+const Congratulations: React.FC<CongratulationsProps> = ({ score, totalQuestions, superhero }) => {
   const percentageScore = (score / totalQuestions) * 100
   let message
 
@@ -21,9 +22,20 @@ const Congratulations: React.FC<CongratulationsProps> = ({ score, totalQuestions
   }
 
   return (
-    <div>
+    <div className="quiz-question">
+      <div className="hero-name">
+              <div className="heroname-container">
+                <h1 className="hero-name-main">{superhero}</h1>  
+                <h1 className="hero-name-last">
+                </h1>
+              </div>
+              <div className="hero-name-botton">
+                <div className="line-1"></div>
+                <div className="line-2"></div>
+              </div>
+            </div>
       <h2>{message}</h2>
-      <p>Your score: {score}/{totalQuestions}</p>
+      <p className='result-score'>Your score: {score}/{totalQuestions}</p>
     </div>
   )
 }
