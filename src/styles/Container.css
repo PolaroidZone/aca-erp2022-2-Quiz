@@ -121,7 +121,8 @@ p{
   display: flex;
   background-color: rgba(255, 0, 0, 0.363);
   backdrop-filter: blur(10px);
-  height: 200px;
+  height: 172.5px;
+  width: 350px;
 }
 
 .charecter:hover {
@@ -129,7 +130,6 @@ p{
   display: flex;
   background-color: rgba(255, 0, 0, 0.808);
   backdrop-filter: blur(10px);
-  height: 200px;
 }
 
 .char-indicator {
@@ -145,8 +145,8 @@ p{
 }
 
 .char-main img {
-  height: 200px;
-  width: 400px;
+  height: 172.5px;
+  width: 350px;
   object-fit: cover;
 }
 

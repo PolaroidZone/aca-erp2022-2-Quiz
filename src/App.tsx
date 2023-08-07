@@ -10,10 +10,14 @@ import SideNavR from "./components/SideNavR"
 import SuperheroNavigation from "./components/SuperheroNavigationProps"
 import Quiz  from './components/Quiz';
 
-import hulk from "./images/Spider-man.png"
+import spiderMan from './images/spiderMan.png'
+import hulk from'./images/hulk.png'
+import blackWidow from'./images/black widow.png'
+import ironMan from './images/Iron man.png'
 
 import './App.css'
 import './styles/Container.css'
+
 
 
 //settingd the question type 
@@ -40,6 +44,7 @@ function App() {
   // const [quizQuestions, setQuizQuestions] = useState<DocumentData[]>([])
 
   const [quizQuestions, setQuizQuestions] = useState<Question[]>([]);
+  const [selectedSuperhero, setSelectedSuperhero] = useState('Iron Man');
 
 
   // //setting json questions to firebase questions
@@ -130,7 +135,7 @@ useEffect(() => {
         <div className="container">
           <div className="side-nac-main-con">
             <SideNavL/>
-            <SuperheroNavigation superheroes={['Iron Man', 'Spider-Man', 'Shuri']} onSuperheroSelect={getQuizQuestions} />
+            <SuperheroNavigation superheroes={['Iron Man', 'Spider-Man', 'Black Widow', 'Hulk', 'Star Lord']} onSuperheroSelect={getQuizQuestions} />
           </div>
           <div className="quiz-box">
             {currentQuestion < quizQuestions.length ? (
