@@ -161,3 +161,8 @@ p{
   width: 110%;
   position: relative;
 }
+
+.result-score {
+  font-size: 70px;
+  color: white;
+}
