@@ -10,10 +10,20 @@ import SideNavR from "./components/SideNavR"
 import SuperheroNavigation from "./components/SuperheroNavigationProps"
 import Quiz  from './components/Quiz';
 
-import spiderMan from './images/spiderMan.png'
+//Splash Art
+import spiderMan from './images/Spider-man.png'
 import hulk from'./images/hulk.png'
 import blackWidow from'./images/black widow.png'
 import ironMan from './images/Iron man.png'
+import starLord from './images/start lord.png'
+
+//thubnail art
+import ironArt from './images/nano-iron-man.png'
+import spiderArt from './images/Spider-Man-in-Avengers-Endgame.png'
+import widowArt from './images/avengers-endgame-black-widow.png'
+import hulkArt from './images/hulk-endgame.png'
+import starArt from './images/star-lord.png'
+
 
 import './App.css'
 import './styles/Container.css'
@@ -45,41 +55,8 @@ function App() {
 
   const [quizQuestions, setQuizQuestions] = useState<Question[]>([]);
   const [selectedSuperhero, setSelectedSuperhero] = useState('Iron Man');
+  const [heroImg, selectedHeroImg] = useState(ironMan)//changing the images
 
-
-  // //setting json questions to firebase questions
-  // useEffect(() => {
-  //   const saveQuizQuestions = async () => {
-  //     const quizQuestionsCollectionRef = collection(db, 'quizQuestions')
-    
-  //     // Create a query to get all documents from the collection
-  //     const quizQuestionsQuery = query(quizQuestionsCollectionRef)
-    
-  //     try {
-  //       // Get the query snapshot
-  //       const querySnapshot = await getDocs(quizQuestionsQuery);
-  //       const questionsExist = !querySnapshot.empty;
-    
-  //       // If the collection is empty, save the quiz questions
-  //       if (!questionsExist) {
-  //         for (const question of quizData) {
-  //           try {
-  //             await addDoc(quizQuestionsCollectionRef, question)
-  //             console.log('Question saved:', question)
-  //           } catch (error) {
-  //             console.error('Error saving question:', error)
-  //           }
-  //         }
-  //       } else {
-  //         console.log('Quiz questions already exist in the database.')
-  //       }
-  //     } catch (error) {
-  //       console.error('Error getting squiz questions:', error)
-  //     }
-  //   }
-    
-  //   saveQuizQuestions()
-  // }, [])
 
   const getQuizQuestions = async (superhero: string) => {
     const quizQuestionsCollectionRef = collection(db, 'quizQuestions');
@@ -89,6 +66,20 @@ function App() {
         .map((doc) => doc.data() as Question)
         .filter((question) => question.superhero === superhero);
       setQuizQuestions(questions);
+      setSelectedSuperhero(superhero)
+
+      if (superhero == 'Iron Man'){
+        selectedHeroImg(ironMan)
+      } else if (superhero == 'Spider-Man'){
+        selectedHeroImg(spiderMan)
+      } else if (superhero == 'Black Widow'){
+        selectedHeroImg(blackWidow)
+      } else if (superhero == 'Hulk') {
+        selectedHeroImg(hulk)
+      } else if(superhero == 'Star Lord') {
+        selectedHeroImg(starLord)
+      } 
+      
     } catch (error) {
       console.error('Error getting quiz questions:', error);
     }
@@ -106,6 +97,7 @@ useEffect(() => {
         .map((doc) => doc.data() as Question)
         .filter((question) => question.superhero === superhero);
       setQuizQuestions(questions);
+      setSelectedSuperhero(superhero)
       setCurrentQuestion(0); // Reset currentQuestion to 0 when a new superhero is selected
     } catch (error) {
       console.error('Error getting quiz questions:', error);
@@ -140,7 +132,7 @@ useEffect(() => {
           <div className="quiz-box">
             {currentQuestion < quizQuestions.length ? (
               <Quiz
-              superhero="Iron Man" // Replace this with the selected superhero name
+              superhero={selectedSuperhero} // Replace this with the selected superhero name
               questions={quizQuestions}
               currentQuestion={currentQuestion}
               handleAnswerClick={handleAnswerClick}
@@ -152,7 +144,7 @@ useEffect(() => {
           <div className="side-nac-main-con">
             <div className="Char-image">
               <div></div>
-              <img src={hulk} alt="" />
+              <img src={heroImg} alt="" />
             </div>
             <SideNavR/>
           </div>

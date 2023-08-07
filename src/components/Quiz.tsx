@@ -27,7 +27,7 @@ const Quiz: React.FC<QuizProps> = ({ superhero, questions, currentQuestion, hand
         <div className="hero-name">
               <div className="heroname-container">
                 <h1 className="hero-name-main">{superhero}</h1>  
-                <h1 className="hero-name-last">Quiz</h1>
+                <h1 className="hero-name-last"></h1>
               </div>
               <div className="hero-name-botton">
                 <div className="line-1"></div>
