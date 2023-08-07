@@ -68,16 +68,16 @@ function App() {
       setQuizQuestions(questions);
       setSelectedSuperhero(superhero)
       setCurrentQuestion(0);
-      
-      if (superhero == 'Iron Man'){
+
+      if (superhero === 'Iron Man'){
         selectedHeroImg(ironMan)
-      } else if (superhero == 'Spider-Man'){
+      } else if (superhero === 'Spider-Man'){
         selectedHeroImg(spiderMan)
-      } else if (superhero == 'Black Widow'){
+      } else if (superhero === 'Black Widow'){
         selectedHeroImg(blackWidow)
-      } else if (superhero == 'Hulk') {
+      } else if (superhero === 'Hulk') {
         selectedHeroImg(hulk)
-      } else if(superhero == 'Star Lord') {
+      } else if(superhero === 'Star Lord') {
         selectedHeroImg(starLord)
       } 
       
@@ -128,7 +128,15 @@ useEffect(() => {
         <div className="container">
           <div className="side-nac-main-con">
             <SideNavL/>
-            <SuperheroNavigation superheroes={['Iron Man', 'Spider-Man', 'Black Widow', 'Hulk', 'Star Lord']} onSuperheroSelect={getQuizQuestions} />
+            <SuperheroNavigation 
+            superheroes={[
+              { name: 'Iron Man', image: ironArt },
+              { name: 'Spider-Man', image: spiderArt },
+              { name: 'Black Widow', image: widowArt },
+              { name: 'Hulk', image: hulkArt },
+              { name: 'Star Lord', image: starArt  },
+            ]}
+             onSuperheroSelect={getQuizQuestions} />
           </div>
           <div className="quiz-box">
             {currentQuestion < quizQuestions.length ? (
